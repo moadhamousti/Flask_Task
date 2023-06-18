@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root{
+    --violet: #9747FF;
+    --dark-blue: #000000;
+    --dark-greyish-blue: #9095a7;
+    --very-vark-blue: #1d1e25;
+    --very-pale-red: #ede0ff;
+    --vary-light-gray: #fafafa;
+    --dark-violet:#6B46C1;
+    --light-violet:#9F7AEA;
+    --link-color:#337ab7;
+    --dark-blue: #000000;
+    --dark-greyish-blue: #9095a7;
+    --very-vark-blue: #1d1e25;
+    --very-pale-red: #ede0ff;
+    --vary-light-gray: #fafafa;
+    --white:#ffffff;
+    --gray-shade:#ccc;
+    --gray-shade-1: #b9b9b9;
+    --gray-shade-2:#888;
+    --dark:rgb(0,0,0);
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--dark-blue);
+}
+body{
+    background-image: url(/static/images/bg-simplify-section-desktoppp.svg);
+    background-repeat: no-repeat;
+    background-position: top;
+    position: relative;
+    scroll-behavior: smooth;
+}
+.container{
+    margin: 0 auto;
+}
+a{
+    color: var(--vary-light-gray);
+}
+.backdrop{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.301);
+    backdrop-filter: blur(3px);
+}
+/*boot*/
+.column{
+    width: 70%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+
+.btn {
+    display: flex;
+}
+
+.button button a {
+    text-decoration: none;
+    font-size: 15px;
+}
+
+
+.button button {
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.3s;
+    width: 90px;
+    margin-left: 12px;
+}
+
+@media (min-width: 900px) and (max-width: 963px) {
+    /* CSS rules for the media query */
+    .button {
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    transition: transform 0.3s;
+    padding: 4px 6px;
+    margin-left: 18px;
+    }
+  }
+
+
+
+
+.button .signup{
+    background-color: var(--vary-light-gray);
+    border-radius: 10px;
+}
+
+.button .login{
+    background-color: rgba(223, 223, 223, 0.301);
+    border-radius: 10px;
+}
+
+
+
+#signup {
+    color: var(--violet);
+    font-weight: 400;
+    font-size: 12px;
+}
+
+#login {
+    color: white;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.button button:hover {
+    transform: translateY(2px);
+}
+
+
+.btn a{
+    text-decoration: none;
+    background-color: var(--violet);
+    width: 150px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 14px;
+    font-weight: 700;
+    transition: .3s;
+}
+
+
+
+
+
+
+
+  
+  
+  
+  
+  

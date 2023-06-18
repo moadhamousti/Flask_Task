@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tarea Sign up</title>
+  <link rel="stylesheet" href="/static/css/login.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="icon" href="/static/images/favicon-.png" type="image/x-icon">
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="/static/images/logoo.svg" alt="Logo" width="200">
+    </div>
+    <div class="signup-link">
+      <span class="connect">Already a member ? </span>
+      <button><a href="{{ url_for('login') }}">Login</a></button>
+    </div>
+    <div class="login-box">
+      <h2>Let's go!</h2>
+      <form action="{{ url_for('signup') }}" method="POST">
+        <h3>Full name</h3>
+        <div class="input-icon">
+          <i class="ri-user-3-line"></i>
+          <input type="text" name="fullname" placeholder="Enter your full name" required>
+        </div>
+        <br>
+        <h3>E-mail</h3>
+        <div class="input-icon">
+          <i class="ri-mail-line"></i>
+          <input type="email" name="email" placeholder="Enter your email here" required>
+        </div>
+        <br>
+        <h3>Password</h3>
+        <div class="input-icon">
+          <i class="ri-lock-2-line"></i>
+          <input type="password" name="password" id="password-input" placeholder="Enter your password here" required>
+          <label for="show-password-toggle" class="checkbox-label">
+            <input type="checkbox" id="show-password-toggle" class="show-password-toggle">
+            Show
+          </label>
+        </div>
+        <button type="submit">Connect</button>
+        <br>
+        <!-- <span class="sso-link"><a href="{{ url_for('sso') }}">Or connect with SSO</a></span> -->
+        <h5>By clicking the button above, you agree to our <a href="">Terms of use</a> and our <a href="">Privacy Policy</a></h5>
+      </form>
+    </div>
+    <h4>You don't have an account ? <a href="{{ url_for('signup') }}">Sign Up</a></h4>
+  </div>
+
+  <script>
+    const passwordInput = document.getElementById('password-input');
+    const showPasswordToggle = document.getElementById('show-password-toggle');
+
+    showPasswordToggle.addEventListener('change', function() {
+      const showPassword = this.checked;
+      passwordInput.type = showPassword ? 'text' : 'password';
+    });
+  </script>
+</body>
+</html>

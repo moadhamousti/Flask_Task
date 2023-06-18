@@ -1,0 +1,203 @@
+{% include 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="/static/images/favicon-.png" type="image/x-icon">
+        <title>{{ current_user.fullname }} Profil</title>
+    
+    <head>
+      {% block content %}
+        <main>
+          <div class="container">
+            <div class="left-side">
+              <h1>Profile</h1>
+              <div class="user-info">
+                {% if user.profile_picture %}
+                  <img src="{{ url_for('static', filename='images/{}'.format(user.profile_picture)) }}" alt="Profile Picture">
+                {% else %}
+                  <img src="{{ url_for('static', filename='images/{}'.format(user.profile_picture)) }}" alt="Default Profile Picture">
+                {% endif %}
+                <h2>{{ user.fullname }}</h2>
+                <h5>{{ user.email }}</h5>
+              </div>
+
+            </div>
+      
+            <form id="profile-form" method="POST" action="{{ url_for('profil') }}" enctype="multipart/form-data">
+              <label for="fullname">Full Name:</label>
+              <input type="text" id="fullname" name="name" value="{{ user.fullname }}" required><br><br>
+      
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{ user.email }}" required><br><br>
+      
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+      
+            <label for="profile-picture">Profile Picture:</label>
+            <input type="file" id="profile-picture" name="profile_picture" accept="image/*"><br><br>
+      
+            <img id="preview-image" src="{{ url_for('static', filename='images/{}'.format(user.profile_picture)) }}" alt="Profile Picture"><br>
+
+
+      
+            <input type="submit" value="Save Changes">
+          </form>
+        </main>
+        {% endblock %}
+      </head>
+      
+        <!-- CSS styling for profile picture preview -->
+        <style>
+          @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+
+          /*===== VARIABLES CSS =====*/
+          /*===== VARIABLES CSS =====*/
+          :root{
+            --black-color: #000000;
+            --violet: #9747FF;
+            
+          }
+          #preview-image {
+          width: 20px; /* Adjust the width as needed */
+          height: 20px; /* Adjust the height as needed */
+          object-fit: cover; /* Maintain aspect ratio and cover the container */
+          margin-bottom: 20px;
+        }
+          .dark-theme{
+            --black-color: #ffffff;
+          }
+          body {
+            height: 80vh;
+            font-family: 'Montserrat', sans-serif;
+          }
+
+          .container {
+          display: flex;
+          /* margin-top: 5px; */
+          border-radius: 15px;
+          padding-top: 20px;
+          padding-bottom: 10px;
+          background-color: white;
+          width: 1050px;
+        }
+
+       
+
+        .left-side {
+          flex-basis: 30%; /* Set the width of the left column */
+          margin-top: 60px;
+        }
+
+        #profile-form {
+          flex-basis: 50%; /* Set the width of the form column */
+        }
+      
+          main {
+            width: 1100px;
+            padding: 20px;
+            /* border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+          }
+      
+          h1 {
+            margin-bottom:15px;
+            text-align: center;
+          }
+      
+          label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            text-align: left;
+            font-size: 12px;
+          }
+      
+          input[type="text"],
+          input[type="email"],
+          input[type="password"],
+          input[type="file"] {
+            width: 680px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+
+          }
+      
+          input[type="submit"] {
+            width: 200px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--violet);
+            color: white;
+            cursor: pointer;
+          }
+
+          input:focus {
+            outline: 2px solid rgb(174, 73, 242); /* Change the color to red */
+          }
+      
+          input[type="submit"]:hover {
+            background-color: #8a2be2;
+          }
+      
+          #preview-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            color: var(--black-color);
+          }
+      
+          .user-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+          }
+      
+          .user-info img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+          }
+      
+          .user-info h2,
+          .user-info h5 {
+            margin: 0;
+          }
+
+          </style>
+        
+        <!--===== MAIN JS =====-->
+        <script src="/static/js/scripts/main.js"></script>
+        <script src="/static/js/scripts/drop-menu.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <script>
+          document.getElementById('profile-picture').addEventListener('change', function(event) {
+          var file = event.target.files[0];
+          var reader = new FileReader();
+
+          reader.onload = function(e) {
+            document.getElementById('preview-image').src = e.target.result;
+          };
+
+          reader.readAsDataURL(file);
+        });
+
+        
+
+          
+        </script>
+
+        
+
+    </body>
+</html>

@@ -1,0 +1,316 @@
+{% include 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/static/images/favicon-.png" type="image/x-icon">
+  <title>{{ current_user.fullname }} Messaging</title>
+
+  <style>
+    /* Add your custom CSS styles here to style the messaging layout */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+    head{
+      font-family: 'Montserrat', sans-serif;
+    }
+    .messaging-container {
+      display: flex;
+      height: 86vh;
+      padding-top: 10px;
+      border-radius: 15px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .cont{
+      border-radius: 10px;
+    }
+
+    .friends-list {
+      flex: 1;
+      background-color: #f5f5f5;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .friends-list ul li {
+      text-decoration: none;
+      color: Violet;
+      list-style-type: none;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .chat-window {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      background-color: #ffffff;
+      padding: 20px;
+    }
+
+    .chat-header {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .message {
+      background-color: #f5f5f5;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    .message-sender {
+      font-weight: bold;
+    }
+
+    .message-content {
+      margin-top: 5px;
+    }
+
+    .friends-list form input{
+      width: 250px;
+      height: 30px;
+      border-radius: 5px;
+      border: solid .5px rgb(143, 130, 238);
+    }
+
+    ul li img{
+      border-radius: 50%;
+      height: 20px;
+      width: 20px;
+    }
+
+    .friends-list button {
+      margin-left: 54px;
+      padding: 5px 10px;
+      background-color: #4b39f2;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+
+    .chat-input {
+      display: flex;
+      margin-top: 20px;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .chat-input button {
+      margin-left: 10px;
+      padding: 5px 10px;
+      background-color: #4caf50;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .recipient-email-box {
+      border: 1px solid #939393;
+      background-color: rgb(161, 161, 249);
+      border-radius: 5px;
+      padding: 10px;
+      height: 600px;
+      margin-bottom: 10px;
+    }
+    .recipient-email {
+      font-weight: bold;
+}
+  </style>
+</head>
+<body>
+  <div class="cont">
+    <div class="messaging-container">
+      <div class="friends-list">
+        <h1>Add User by Email</h1>
+        {% if error %}
+        <p>{{ error }}</p>
+        {% endif %}
+        <form id="add-user-form" method="POST" action="{{ url_for('add_user') }}">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            <button>Add +</button>
+        </form>
+        <h3>Your Friends:</h3>
+        <ul id="friends-list">
+          {% for friend in friends %}
+          <li>
+            <img src="{{ url_for('static', filename='images/{}'.format(friend.profile_picture)) }}" alt="">
+            <a class="friend" href="#" data-email="{{ friend.email }}">
+              {{ friend.fullname }}
+            </a>
+            <button class="remove-friend" data-email="{{ friend.email }}">-</button>
+          </li>
+          {% endfor %}
+        </ul>
+    </div> 
+  
+      <div class="chat-window">
+        <h1 class="chat-header">Messenger</h1>
+        <div id="chat-messages" class="chat-messages"></div>
+        <div class="recipient-email-box">
+          <span id="recipient-email" class="recipient-email"></span>
+        </div>
+        <form id="chat-form" class="chat-input" method="POST" action="">
+          <input type="hidden" id="recipient-email-input" name="recipient_email">
+          <input type="text" id="message-input" name="message" placeholder="Type your message" required>
+          <button type="submit" onclick="sendMessage()">Send</button>
+        </form>
+      </div>
+    </div>
+  
+  </div>
+  <!-- Include the necessary libraries -->
+  <script src="//code.jquery.com/jquery-1.11.1.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+
+  <!-- Your custom JavaScript code -->
+  <script>
+    function sendMessage() {
+    // Get the recipient email and message content
+    const recipientEmail = document.getElementById('recipient-email-input').value;
+    const message = document.getElementById('message-input').value;
+
+    // Clear the message input field
+    document.getElementById('message-input').value = '';
+
+    // Emit the message to the server
+    socket.emit('send_message', { recipient_email: recipientEmail, message: message });
+  }
+    const socket = io();
+    const chatMessages = document.getElementById('chat-messages');
+    const messageInput = document.getElementById('message-input');
+
+    function openChatWithFriend(friendEmail) {
+  // Set the friend's email in the chat window header
+  document.title = `${friendEmail} Messenger`;
+
+  // Set the recipient email in the recipient-email-box
+  const recipientEmailBox = document.getElementById('recipient-email');
+  recipientEmailBox.innerHTML = friendEmail;
+
+  // Clear the chat messages
+  chatMessages.innerHTML = '';
+
+  // Fetch the chat history for the selected friend
+  fetchChatHistory(friendEmail);
+}
+
+    // Function to fetch the chat history for a friend
+    function fetchChatHistory(friendEmail) {
+      // Send a request to the server to get the chat history
+      socket.emit('get_chat_history', { recipient_email: friendEmail });
+    }
+
+    // Handle the chat history received from the server
+    socket.on('receive_chat_history', (data) => {
+      const { recipient_email, messages } = data;
+      displayChatHistory(recipient_email, messages);
+    });
+
+    // Function to display the chat history in the chat window
+    function displayChatHistory(friendEmail, messages) {
+      // Loop through the messages and display them in the chat window
+      messages.forEach((message) => {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message';
+        messageDiv.innerHTML = `<span class="message-sender">${message.sender}</span>: <span class="message-content">${message.content}</span>`;
+        chatMessages.appendChild(messageDiv);
+      });
+
+      // Scroll to the bottom of the chat window
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    const chatForm = document.getElementById('chat-form');
+    chatForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const message = messageInput.value.trim();
+      if (message !== '') {
+        sendMessageToFriend(chatFriend.textContent, message);
+        messageInput.value = '';
+      }
+    });
+
+    // Function to send a message to a friend
+    function sendMessageToFriend(friendEmail, message) {
+      // Send the message to the server
+      socket.emit('send_message', { recipient_email: friendEmail, message: message });
+    }
+
+    // Handle incoming messages from the server
+    socket.on('receive_message', (data) => {
+      const { sender_email, message } = data;
+      displayReceivedMessage(sender_email, message);
+    });
+
+    // Function to display received messages in the chat window
+    function displayReceivedMessage(senderEmail, message) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'message';
+      messageDiv.innerHTML = `<span class="message-sender">${senderEmail}</span>: <span class="message-content">${message}</span>`;
+      chatMessages.appendChild(messageDiv);
+
+      // Scroll to the bottom of the chat window
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    // Function to handle friend removal
+function removeFriend(email) {
+    // Remove the friend from the DOM
+    var friendElement = document.querySelector(`[data-email="${email}"]`).parentNode;
+    friendElement.parentNode.removeChild(friendElement);
+
+    // Send a request to remove the friend from the server
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/dashboard/add_user/remove_friend', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                console.log(xhr.responseText);
+            } else {
+                console.error('Error removing friend:', xhr.status);
+            }
+        }
+    };
+    xhr.send(`email=${encodeURIComponent(email)}`);
+}
+
+// Add click event listeners to all remove buttons
+var removeButtons = document.getElementsByClassName('remove-friend');
+Array.from(removeButtons).forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        event.preventDefault();
+        var email = this.getAttribute('data-email');
+        removeFriend(email);
+    });
+});
+
+
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+

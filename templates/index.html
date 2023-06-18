@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--=============== REMIX ICONS ===============-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+	<!-- ================ LINKED CSS FILES =============== -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="/static/css/chatbot.css">
+    <link rel="icon" href="/static/images/favicon-.png" type="image/x-icon">
+
+
+
+    <link rel="stylesheet" href="/static/css/global.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/responsive.css">
+    <link rel="stylesheet" href="/static/css/top.css">
+
+	<!-- ================ PAGE TITLE =============== -->
+    <title>Tarea Task Manager</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+    body{
+        font-family: 'Montserrat', sans-serif;
+    }
+    footer .about-t p{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgb(142, 142, 142);
+        font-size: 13px;
+        padding-bottom: 20px;
+    }
+    .to-top{
+    background: #6B46C1;
+    }
+
+    .to-top i{
+        color: rgb(255, 255, 255);
+    }
+    .content .img-why-is{
+    width: 550px;
+    height: 320px;
+    padding-right: 50px;
+}
+
+.chatbox-toggle i {
+    color: white;
+}
+
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 80px;
+}
+
+.content #fear-all{
+    padding-bottom: 20px;
+}
+
+.content p{
+    font-weight: 400;
+}
+.content {
+    font-weight: 700;
+    font-size: 18px;
+}
+.content #options,#feat {
+    color: #9747FF;
+    list-style: none;
+}
+.content .its-free{
+    width: 480px;
+    height: 300px;
+    margin-right: 30px;
+}
+.content .text .col2 {
+    padding-bottom: 30px;
+}
+
+
+.tabs_templates {
+    -webkit-box-align: start;
+    align-items: flex-start;
+}.tabs {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    max-width: 950px;
+    margin: 50px auto 0px;
+}
+.tabs_templates .tabs__nav {
+    padding-top: 15px;
+}.tabs__nav--invert {
+    -webkit-box-ordinal-group: 2;
+    order: 1;
+}.tabs__nav {
+    width: 40%;
+    flex-shrink: 0;
+    -webkit-box-ordinal-group: 3;
+    order: 2;
+}
+.tabs__item_active {
+    border-width: 1px;
+    border-radius: solid;
+    border-color: rgb(123, 104, 238);
+    border-image: initial;
+}
+.tabs__item {
+    display: block;
+    transition: all 0.2s ease 0s;
+    padding: 30px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    border-image: initial;
+    background: rgb(255, 255, 255);
+    border-radius: 4px;
+    margin: 0px 0px 5px;
+    outline: 0px;
+}
+/* a {
+    transition: all 0.2s ease 0s;
+    text-decoration: none;
+} */
+.tabs__item_active .tabs__header {
+    color: rgb(123, 104, 238);
+}
+.tabs__header {
+    color: rgb(13, 13, 13);
+    transition: all 0.2s ease 0s;
+    font: 700 18px Axiforma, Arial, serif;
+    margin: 0px 0px 5px;
+}
+.tabs__subheader {
+    color: rgba(0, 0, 0, 0.4);
+    font: 500 15px / 1.4em Axiforma, Arial, serif;
+}
+.tabs__item .tabs__item_active{
+    border: #9747FF .5px solid;
+    border-radius: 20px;
+}
+.tabs__panel_active {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.features{
+    padding-top: 80px;
+    padding-bottom: 60px;
+}
+</style>
+<body>
+
+	<!-- ================ HEADER =============== -->
+	<header>
+        <div class="column">
+            <div class="desktop">
+                <a href="#"><img data-speed=".6" class="logo" src="/static/images/logoo.svg" alt="Logo" width="150"></a>
+                <nav>
+                    <a href="#about" class="tag"><h3>About</h3></a>
+                    <a href="#product" class="tag"><h3>Product</h3></a>
+                    <a href="#explore" class="tag"><h3>Explore</h3></a>
+                    <a href="#features" class="tag"><h3>Features</h3></a>
+                    <a href="#contact" class="tag"><h3>Contact</h3></a>
+                </nav>
+                <div class="button">
+                    <button class="signup"><a class="nav-button" href="{{ url_for('signup') }}" id="signup">Sign Up</a></button>
+                    <button class="login"><a class="nav-button" href="{{ url_for('login') }}" id="login">Log in</a></button>
+                </div>
+            </div>  
+
+            <div class="mobile">
+                <a href="#"><img src="/static/images/logoo.svg" alt="Logo"></a>
+
+                <img id="menu" class="menu" src="/static/images/icon-hamburger.svg" alt="Menu">
+
+
+                <img id="close-menu" style="display:none;" src="/static/images/icon-close.svg" alt="Menu">
+
+                 <nav class="dropOut">
+                    <a href="#about"><h3>About</h3></a>
+                    <a href="#product"><h3>Product</h3></a>
+                    <a href="#explore"><h3>Explore us</h3></a>
+                    <a href="#features"><h3>Features</h3></a>
+                    <a href="#contact"><h3>Contact</h3></a>
+                </nav>
+                
+            </div>
+        </div>
+    </header>
+	<!-- ================ LANDING PAGE =============== -->
+    <div class="container">
+        <section class="landing">
+            <div data-speed=".6" class="column">
+                <div class="descrip">
+                    <h1>Organize Your Tasks Embrace life full of Experiences!</h1>
+                    <h3>Torea makes it simple for users to plan day-to-day tasks while keeping the larger goals in view.</h3>
+                    <div class="btn">
+                        <a class="landing-btn" href="{{ url_for('signup') }}">Get Started</a>
+                    </div>
+                </div>
+                    
+                <div class="intro">
+                    <img class="image" data-speed=".08" src="/static/images/R.gif" alt="intro">
+                </div>
+            </div>      
+        </section>
+
+        <section class="clts" id="about">
+            <div class="column">
+                <h1>About Tarea</h1>
+                <div class="content">
+                    <img class="img-why-is" src="/static/images/dashboard.png" alt="" srcset="">
+                    <div class="text">
+                        <p>
+                            When it comes down to choosing task management software,all you need is three things:
+                        </p>
+                        <ul id="fear-all">
+                            <li id="feat">
+                                <i id="options" class='bx bx-check bx-md'></i> FREE
+                            </li>
+                            <li id="feat">
+                                <i id="options" class='bx bx-check bx-md'></i> Easy of use
+
+                            </li>
+                            <li id="feat">
+                                <i id="options" class='bx bx-check bx-md'></i> Versatility
+
+                            </li>
+                        </ul>
+                        <p>
+                            Coincidentally, that’s exactly what you get from tarea - task management software that’s
+                            easy
+                            to
+                            use and features dozens of collaboration tools.
+                        </p>
+                    </div>
+
+
+                </div>
+
+                
+            </div>
+            <div class="swiper-pagination"></div>
+        </section>
+
+
+        <section class="clts" id="product">
+            <div class="column">
+                <h1>Life Is Easier with Tarea</h1>
+                <div class="content">
+                    <img class="its-free" src="/static/images/signup.gif" alt="" srcset="">
+                    <div class="text">
+                        <p>
+                        <p>
+                            To get started with Tarea, all you have to do is sign up using your email and... that’s
+                            it! Once you’ve signed up for our free plan, you get access to all of the basic tools in
+                            Tarea FOREVER.
+                        </p>
+                        <br>
+                        <ul id="fear-all">
+                            <li id="feat">
+                                <i id="options" class='bx bx-check bx-md'></i> FREE
+                            </li>
+                            <li id="feat">
+                                <i id="options" class='bx bx-check bx-md'></i> Easy of use
+
+                            </li>
+                            <li id="feat">
+                                <i id="options" class='bx bx-check bx-md'></i> Versatility
+
+                            </li>
+                        </ul>
+                        <div class="btn">
+                            <a class="landing-btn" href="{{ url_for('signup') }}">Get Started</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                
+
+                
+            </div>
+            <div class="swiper-pagination"></div>
+        </section>
+
+
+
+        <section class="clts" id="explore">
+                <div class="column-3">
+                    <h1 >Let Tarea Do the Work</h1>
+                    <div class="tabs tabs_templates" data-tabs="">
+                        <div class="tabs__nav tabs__nav--invert">
+                            <a class="tabs__item tabs__item_active" data-tab-nav="" href="#task-templates-1">
+                                <h4 class="tabs__header">
+                                    Stylish
+                                </h4>
+                                <div class="tabs__subheader">
+                                    The Dashboard Have a unique design, and an easy layout to understand .
+                                </div>
+                            </a>
+                            <a class="tabs__item tabs__item_active"  href="#task-templates-2">
+                                <h4 class="tabs__header">
+                                    Effective
+                                </h4>
+                                <div class="tabs__subheader">
+                                    Tarea does the busy work. Set due dates for long and short Tasks.
+                                </div>
+                            </a>
+                            <a class="tabs__item tabs__item_active" href="#task-templates-3">
+                                <h4 class="tabs__header">
+                                    Simple
+                                </h4>
+                                <div class="tabs__subheader">
+                                    Use the search bar to reach any section in the dashboard for a great experience.
+                                </div>
+                            </a>
+                        </div>
+                        <div class="tabs__content tabs__content--invert" data-tab-content="">
+                            <div class="tabs__panel tabs__panel_active" id="task-templates-1">
+                                <img alt="Customizable" class="no-border" height="500" loading="lazy" src="/static/images/style.gif" style="border-radius: 5px;box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.14773);" width="500" draggable="false">
+                            </div>
+                            <div class="tabs__panel" id="task-templates-2">
+                        
+                                    <img alt="Powerful" class="no-border" decoding="async" height="500" loading="lazy" src="/static/images/dates.gif" style="border-radius: 5px;box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.14773);" width="500">
+                             
+                            </div>
+                            <div class="tabs__panel" id="task-templates-3">
+                                <img alt="Simple" class="no-border" height="500" loading="lazy" src="/static/images/search.gif" style="border-radius: 5px;box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.14773);" width="500" draggable="false">
+                            </div>
+                        </div>
+                    </div>
+                <script>
+                   
+    const customizableTab = document.querySelector('[href="#task-templates-1"]');
+    const powerfulTab = document.querySelector('[href="#task-templates-2"]');
+    const simpleTab = document.querySelector('[href="#task-templates-3"]');
+    
+    const customizablePanel = document.getElementById('task-templates-1');
+    const powerfulPanel = document.getElementById('task-templates-2');
+    const simplePanel = document.getElementById('task-templates-3');
+    
+    
+    powerfulPanel.style.display = 'none';
+    simplePanel.style.display = 'none';
+    
+    customizableTab.addEventListener('click', () => {
+      customizablePanel.style.display = 'block';
+      powerfulPanel.style.display = 'none';
+      simplePanel.style.display = 'none';
+    });
+    
+    powerfulTab.addEventListener('click', () => {
+      customizablePanel.style.display = 'none';
+      powerfulPanel.style.display = 'block';
+      simplePanel.style.display = 'none';
+    });
+    
+    simpleTab.addEventListener('click', () => {
+      customizablePanel.style.display = 'none';
+      powerfulPanel.style.display = 'none';
+      simplePanel.style.display = 'block';
+    });
+    
+                </script>
+
+                
+
+                
+            </div>
+            <div class="swiper-pagination"></div>
+        </section>
+
+
+        <section class="features" id="features">
+            <div class="col">
+                <h1>More Tarea Features</h1>
+                <div class="boxes">
+                    <div class="box">
+                        <h1 class="feat">Statistics</h1>
+                        <h3 class="feat-exp">Tarea express with data everything about you. To make thing easier for , and also a reminder for your important and coming projects and tasks.</h3>
+                        <h5 class="read-more"><a href="#">Read More</a></h5>
+                    </div>
+                    <div class="box">
+                        <h1 class="feat">Communication</h1>
+                        <h3 id="feat-exp">With Tarea you can add other
+                            users in the same platform using
+                            their personnal email for More 
+                            privacy safe sharing, and also to make the experience
+                        between user fun.</h3>
+                        <h5 class="read-more"><a href="#">Read More</a></h5>
+                    </div>
+                    <div class="box">
+                        <h1 class="feat">Settings</h1>
+                        <h3 class="feat-exp">With Tarea you can
+                            access the profil settings,
+                            Tarea allows you to change your informations,
+                            (Email, Password..) and even
+                            your own profil picture.</h3>
+                        <h5 class="read-more"><a href="#">Read More</a></h5>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="swiper-pagination"></div>
+        </section>
+
+
+
+
+
+        
+
+        <section class="simplify" id="contact">
+            <div  class="column">
+                <h1>Simplify how you organize your tasks today.</h1>
+                <div class="btn">
+                    <a href="#">Get Started</a>
+                </div>
+            </div>    
+        </section>
+    </div>
+
+    <footer>
+        <div class="column">
+            <div class="socials">
+                <a href="#"><img class="logo" src="/static/images/logowhite.svg" alt="Logo"></a>
+                <div class="about-t">
+                    <!-- <p>Toreo Task Manager makes <br> your life easier ,manage your <br> tasks and projects.</p>    -->
+                    <div class="network">
+                        <a href="https://www.facebook.com/"><img src="/static/images/icon-facebook.svg" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/"><img src="/static/images/icon-instagram.svg" alt="Instagram"></a>
+                        <a href="#"><img src="/static/images/icon-pinterest.svg" alt="Pinterest"></a>
+                        <a href="https://twitter.com/"><img src="/static/images/icon-twitter.svg" alt=""></a>
+                        <a href="https://www.youtube.com/"><img src="/static/images/icon-youtube.svg" alt="Youtube"></a>
+                    </div>
+                </div>
+            </div><!--socials-->
+            <div class="utilities">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Explore</a>
+                <a href="#">Features</a>
+                <a href="#">Contact</a>
+                <a href="#">FAQ</a>
+                <a href="#">Privacy Politicy</a>  
+                
+            </div>
+            <div class="search">
+                <p>Copyright 2023. All Rights Reserved. <br>
+                    <a href="#" style="text-decoration: none;">tarea@support.com</a>
+            </div>
+        </div>
+    </footer> 
+    <div class="backdrop" style="display:none;">
+    </div>
+
+
+
+
+
+
+    <!-- chat bot -->
+
+
+
+    <div class="chatbox-wrapper">
+        <div class="chatbox-toggle">
+            <i class='bx bx-message-dots'></i>
+        </div>
+        <div class="chatbox-message-wrapper">
+            <div class="chatbox-message-header">
+                <div class="chatbox-message-profile">
+                    <img src="/static/images/352572016_1703282456792179_6713400837320543171_n.jpg" alt="" class="chatbox-message-image">
+                    <div>
+                        <h4 class="chatbox-message-name">Moad Hamousti</h4>
+                        <p class="chatbox-message-status"><span style="color: rgb(1, 189, 1);">⬤</span> online</p>
+                    </div>
+                </div>
+                <div class="chatbox-message-dropdown">
+                    <i class='bx bx-dots-vertical-rounded chatbox-message-dropdown-toggle'></i>
+                    <!-- <ul class="chatbox-message-dropdown-menu">
+                        <li>
+                            <a href="#">Search</a>
+                        </li>
+                        <li>
+                            <a href="#">Report</a>
+                        </li>
+                    </ul> -->
+                </div>
+            </div>
+            <div class="chatbox-message-content">
+                <h4 class="chatbox-message-no-message">You don't have any messages yet!</h4>
+            </div>
+            <div class="chatbox-message-bottom">
+                <form action="#" class="chatbox-message-form">
+                    <textarea rows="1" placeholder="Type message..." class="chatbox-message-input"></textarea>
+                    <button type="submit" class="chatbox-message-submit"><i class='bx bx-send'></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- TO THE TOP ICON  -->
+
+    <a class="to-top" href="#">
+		<i class="ri-arrow-up-line"></i>
+	</a>
+
+    <script src="/static/js/scripts/menu.js"></script>
+    <script src="/static/js/scripts/chatbot.js"></script>
+    <script src="/static/js/scripts/top.js"></script>
+
+    <!-- ======================= GSAP ===================== -->
+	<script src="/static/js/libs/gsap/TweenMax.min.js"></script>
+    <script src="/static/js/libs/gsap/gsap.min.js"></script>
+	<script src="/static/js/scripts/top.js"></script>
+    <!-- <script src="/static/js/scripts/motion.js"></script> -->
+
+
+
+</body>
+</html>

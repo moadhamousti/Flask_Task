@@ -1,0 +1,346 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root{
+    --violet: #9747FF;
+    --dark-violet:#6B46C1;
+    --light-violet:#9F7AEA;
+    --link-color:#337ab7;
+    --dark-blue: #000000;
+    --dark-greyish-blue: #9095a7;
+    --very-vark-blue: #1d1e25;
+    --very-pale-red: #ede0ff;
+    --vary-light-gray: #fafafa;
+    --white:#ffffff;
+    --gray-shade:#ccc;
+    --gray-shade-1: #b9b9b9;
+    --gray-shade-2:#888;
+    --dark:rgb(0,0,0);
+}
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--dark-blue);
+}
+body{
+    background-image: url(/static/images/sty.svg);
+    background-repeat: no-repeat;
+    background-position: top;
+    position: relative;
+    scroll-behavior: smooth;
+}
+
+
+h2{
+    margin-bottom: 20px;
+    font-size: 25px;
+}
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  .logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+  .signup-link {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  
+  .login-box {
+    background-color: #fff;
+    border: none;
+    border-radius: 7px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    text-align: center;
+    width: 600px;
+    padding: 20px 50px;
+  }
+  .login-box input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+  .login-box button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--dark-violet); /* Dark violet color */
+    color: #fff; /* Text color */
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(149, 149, 149, 0.5); /* Box shadow */
+  }
+
+
+  .forg-password{
+    text-decoration: none;
+    color: var(--dark-violet);
+    font-size: 12px;
+  }
+  
+  .login-box button:hover {
+    background-color: var(--light-violet); /* Light violet color on hover */
+  }
+
+  .login-box .sso-link {
+    margin-top: 10px;
+    color: var(--link-color);
+    text-decoration: none;
+  }
+
+
+  .sso-link a{
+    text-decoration: none;
+    color: var(--violet);
+    font-size: 12px;
+
+  }
+
+
+
+  .input-icon {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 15px;
+  }
+  
+  .input-icon i {
+    position: absolute;
+    left: 8px;
+    top: 30%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--gray-shade-2);
+  }
+  
+
+  .input-icon input{
+    padding-left: 30px;
+    width: 500px;
+    border-radius: 10px;
+    padding-left: 30px;
+    border: 1px solid var(--gray-shade);
+    outline: none; /* Remove the blue outline */
+  }
+      
+      .input-icon input:focus {
+        border-color: var(--gray-shade-1); /* Apply custom focus color */
+      }
+
+  
+h3{
+    font-weight: 600;
+    font-size: 13px;
+    padding-bottom: 5px;
+    text-align: left;
+
+}
+
+
+
+.signup-link button {
+  background-color: var(--dark-violet); /* Dark violet color */
+  color: var(--white); /* Text color */
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 90px;
+  height: 40px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Box shadow */
+}
+
+.signup-link button:hover {
+  background-color: var(--light-violet); /* Light violet color on hover */
+}
+
+
+h4{
+    padding-top: 5px;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--white);
+}
+
+h4 a{
+    text-decoration: underline;
+    color: var(--white);
+    font-weight: 500;
+}
+
+.signup-link button a{
+    text-decoration: none;
+    color: var(--white);
+}
+
+.signup-link span{
+    font-size: 15px;
+}
+
+h5{
+    padding-top: 10px;
+    font-size: 9px;
+    font-weight: 300;
+    color: var(--dark);
+}
+
+h5 a{
+    text-decoration: underline;
+    color: var(--dark);
+    font-weight: 500;
+}
+
+
+
+.gmail-signup {
+    display: inline-block;
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #6B46C1;
+  }
+  
+  .gmail-signup i {
+    margin-right: 5px;
+  }
+
+
+ 
+  
+  
+  .checkbox-label {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--violet);
+    cursor: pointer;
+    padding-bottom: 20px;
+  }
+  
+  .show-password-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    z-index: -1;
+  }
+  
+  .show-password-toggle + span::before {
+    content: "";
+    display: block;
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--gray-shade);
+    border-radius: 2px;
+    background-color: var(--white);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .show-password-toggle:checked + span::before {
+    background-color: var(--dark-violet); /* Dark violet color */
+  }
+  
+  .show-password-toggle:checked + span::after {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 10px;
+    border: solid var(--white);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+
+  @media screen and (max-width: 600px) {
+    .login-box {
+      width: 90%;
+    }
+    .login-box span {
+    display: none; /* Hide the span element */
+  }
+
+  .input-icon input{
+    padding-left: 30px;
+    width: 400px;
+  }
+  }
+
+  @media screen and (max-width: 550px) {
+    .login-box span {
+    display: none; /* Hide the span element */
+  }
+
+  .input-icon input{
+    padding-left: 30px;
+    width: 400px;
+  }
+  }
+
+
+  @media screen and (max-width: 458px) {
+    .login-box span {
+    display: none; /* Hide the span element */
+  }
+
+  .input-icon input{
+    padding-left: 30px;
+    width: 320px;
+  }
+  }
+
+  @media screen and (max-width: 450px) {
+    .login-box span {
+    display: none; /* Hide the span element */
+  }
+
+  .input-icon input{
+    padding-left: 30px;
+    width: 250px;
+  }
+  }
+
+  @media screen and (max-width: 350px) {
+    .login-box span {
+    display: none; /* Hide the span element */
+  }
+
+  .input-icon input{
+    padding-left: 30px;
+    width: 250px;
+  }
+  }
+
+
+
+  
+
+  
+  
+  
+  

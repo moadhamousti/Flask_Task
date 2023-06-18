@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tarea Log in</title>
+  <link rel="stylesheet" href="/static/css/login.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="icon" href="/static/images/favicon-.png" type="image/x-icon">
+  <style>
+    .alert {
+      color: red;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="/static/images/logoo.svg" alt="Logo" width="200">
+    </div>
+    <div class="signup-link">
+      <span class="connect">You don't have an account ? </span>
+      <button><a href="{{ url_for('signup') }}">Sign up</a></button>
+    </div>
+    <div class="login-box">
+      <h2>Welcome!</h2>
+      <form action="{{ url_for('login') }}" method="POST">
+        {% if error %}
+        <p class="alert">{{ error }}</p>
+        {% endif %}
+        <h3>E-mail</h3>
+        <div class="input-icon">
+          <i class="ri-mail-line"></i>
+          <input type="email" name="email" placeholder="Enter your email here" required>
+        </div>
+        <br>
+        <h3>Password</h3>
+        <div class="input-icon">
+          <i class="ri-lock-2-line"></i>
+          <input type="password" name="password" placeholder="Enter your password here" required>
+        </div>
+        <br>
+        <button type="submit">Connect</button>
+        <br>
+        <!-- <span class="sso-link"><a href="{{ url_for('sso') }}">Or connect with SSO</a></span> -->
+      </form>
+    </div>
+    <h4>You don't have an account ? <a href="{{ url_for('signup') }}">Sign Up</a></h4>
+  </div>
+</body>
+</html>

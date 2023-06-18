@@ -1,0 +1,137 @@
+{% include 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/> <!-- 'classic' theme -->
+    <link rel="icon" href="/static/images/favicon-.png" type="image/x-icon">
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+    body{
+      font-family: 'Montserrat', sans-serif;
+    }
+    .container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .form-container {
+      width: 40%;
+      padding-top: 20px;
+    }
+
+    .form-container label {
+      display: block;
+    }
+
+    .form-container input[type="text"],
+    .form-container input[type="color"],
+    .form-container input[type="date"] {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .form-container input[type="text"]:focus,
+    .form-container input[type="color"]:focus,
+    .form-container input[type="date"]:focus {
+      outline: 2px solid rgb(174, 73, 242);
+    }
+
+    .calendar-container {
+    width: 58%;
+    background-color: #dfd6f9; /* Light violet color */
+    border-radius: 15px;
+    overflow: auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    border: solid .5px #bca8f6;
+  }
+  #calendar{
+    height: 450px;
+  }
+
+
+  .cont-forall{
+    background-color: white;
+    border-radius: 15px;
+    padding-top: 20px;
+    padding-left: 25px;
+    padding-right: 25px;
+    height: 500px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  form input{
+      width: 250px;
+      height: 30px;
+      border-radius: 5px;
+      border: solid .5px rgb(143, 130, 238);
+    }
+    form button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #4b39f2;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+  </style>
+</head>
+
+{% block content %}
+  <div class="cont-forall">
+    <div class="container">
+        <div class="form-container">
+          <form id="addTaskForm" method="POST" action="{{ url_for('calendar') }}">
+            <label for="task">Task:</label>
+            <input type="text" id="task" name="task" required>
+    
+            <label for="color">Task Color:</label>
+            <input type="color" id="color" name="color">
+    
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" required>
+    
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date" required>
+    
+            <button type="submit">Add Task</button>
+          </form>
+        </div>
+    
+        <div class="calendar-container">
+          <div id="calendar"></div>
+        </div>
+      </div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.es5.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let calendarEl = document.getElementById('calendar');
+        let calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            events: [
+              {% for task in tasks %}
+                {
+                  title: "{{ task.task }}",
+                  start: "{{ task.start_date }}",
+                  end: "{{ task.end_date }}",
+                  backgroundColor: "{{ task.color }}"
+                },
+              {% endfor %}
+            ]
+        });
+
+        calendar.render();
+    });
+
+</script>
+{% endblock %}

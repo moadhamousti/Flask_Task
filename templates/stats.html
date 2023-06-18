@@ -1,0 +1,157 @@
+{% include 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.min.css">
+    <link rel="icon" href="/static/images/favicon-.png" type="image/x-icon">
+    <title>{{ current_user.fullname }} Stats</title>
+    <style>
+        .container {
+          background-color: white;
+          border-radius: 10px;
+          padding: 20px;
+          margin-bottom: 20px;
+        }
+        
+        .container h2 {
+          margin: 0;
+          font-size: 15px;
+        }
+        
+        .container-wrapper {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          grid-gap: 20px;
+          margin-top: 90px;
+        }
+        .container h2{
+          font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-wrapper">
+        <div class="container">
+            <h2>Repeated Tasks</h2>
+            <div id="chart"></div>
+        </div>
+        
+        <div class="container">
+            <h2>Important Tasks</h2>
+            <div id="chart-importance"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.min.js"></script>
+    <script src="/static/js/scripts/drop-menu.js"></script>
+    <script>
+const repeatedTasks = [
+    {% for task in repeated_tasks %}
+      {
+        taskName: '{{ task.taskName }}',
+        repeatCount: {{ task.repeatCount }}
+      },
+    {% endfor %}
+  ];
+
+const repeatedTasksOptions = {
+  series: repeatedTasks.map(task => task.repeatCount),
+  labels: repeatedTasks.map(task => task.taskName),
+  chart: {
+    width: 380,
+    type: 'donut',
+  },
+  dataLabels: {
+    enabled: false
+  },
+  responsive: [{
+    breakpoint: 480,
+    options: {
+      chart: {
+        width: 250
+      },
+      legend: {
+        show: false
+      }
+    }
+  }],
+  legend: {
+    position: 'right',
+    offsetY: 0,
+    height: 230,
+  }
+};
+
+const chart = new ApexCharts(document.querySelector("#chart"), repeatedTasksOptions);
+chart.render();
+
+/////////////////////////////////////////////////////////////////////////////-
+
+const importanceTasks = [
+        {% for task in repeated_tasks %}
+        {
+            taskName: '{{ task.taskName }}',
+            repeatCount: {{ task.repeatCount }}
+        },
+        {% endfor %}
+    ];
+
+    const importanceTasksOptions = {
+        series: [
+            {
+                name: 'Tasks Completion',
+                data: importanceTasks.map(task => task.repeatCount)
+            }
+        ],
+        chart: {
+            type: 'bar',
+            height: 200,
+            width: 350,
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 0,
+                horizontal: true,
+                distributed: true,
+                barHeight: '80%',
+                dataLabels: {
+                    position: 'top',
+                },
+            },
+        },
+        colors: [
+            '#F44F5E',
+            '#E55A89',
+            '#4BC3E6',
+        ],
+        dataLabels: {
+            enabled: true,
+            formatter: function (val) {
+                return val.toString();
+            },
+            style: {
+                colors: ['#000'],
+            },
+        },
+        legend: {
+            show: false,
+        },
+        xaxis: {
+            categories: importanceTasks.map(task => task.taskName),
+        },
+    };
+
+    const chartImportance = new ApexCharts(document.querySelector("#chart-importance"), importanceTasksOptions);
+    chartImportance.render();
+
+
+/////////////////////////////////////////////////////////////////////////////-
+    </script>
+
+
+
+
+</body>
+</html>

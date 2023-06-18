@@ -1,0 +1,513 @@
+{% include 'base.html' %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- fonts  -->
+    <link href="https://fonts.googleapis.com/css2?family=Cuprum&family=Epilogue:wght@500;700&display=swap"
+        rel="stylesheet">
+    <!-- Material icons -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="/static/images/favicon-.png" type="image/x-icon">
+    <title>
+        Flask Dashboard Black - {% block title %}{% endblock %} | AppSeed
+    </title>
+    <style>
+      /* ------------MAIN--------------------- */
+      /* @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+      body{
+        font-family: 'Montserrat', sans-serif;
+      } */
+.main{
+    transition: var(--tran-05);
+  display: grid;
+   grid-area: main;
+  padding: 20px;
+   gap: 20px;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-rows: repeat(3,1fr);
+ grid-template-areas: 
+ "c1 c2 c3 "
+ "c4 c4 c5"
+ "c4 c4 c6 "
+ ;
+}
+.card{
+    background-color: #f6f7f9;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
+    
+}
+
+.containerr {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.icon-cont {
+  margin-right: 10px; /* Optional spacing between the icon and h3 */
+  padding-bottom: 5px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+
+
+
+
+
+.icon-cont i {
+  color: white;
+  font-size: 24px; 
+  
+}
+
+.icon-cont h3{
+  margin-right: 10px; 
+  align-items: center;
+  display: flex;
+  padding-bottom: 30px;
+} */
+
+
+.card h3{
+  margin-left: 10px;
+}
+/* ==================card 1======================= */
+.card:nth-child(1){
+    grid-area: c1;
+}
+main .card-header i {
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    color: white;
+    padding: 4px 4px;
+}
+
+.task-details {
+  margin-top: 10px;
+}
+.task-details span{
+  font-weight: bold;
+  color: var(--primary-color);
+}
+.task-name {
+  font-weight: bold;
+}
+
+.task-dates span{
+  margin-left: 10px;
+}
+
+
+.no-task {
+  font-style: italic;
+  color: gray;
+}
+
+.card-header .text-card{
+    margin-left: 25px;
+    color: rgb(186, 47, 236);
+    font-size: 13px;
+    font-weight: lighter;
+    margin-top: 10px;
+    margin-bottom: 1px;
+    display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+
+.card-header .text-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(218, 114, 255, 0.3);
+  border-radius: 10px;
+  filter: blur(10px);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  pointer-events: none;
+}
+
+.card-header .text-card:hover::before {
+  opacity: 1;
+}
+
+main .card-header .middle{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+main .card-header .middle h3{
+    margin: 0 10px 0px 0rem;
+    padding-bottom: 1px;
+}
+main .card-header .progress{
+    position: relative;
+    width: 92px;
+    height: 92px;
+    /* border-radius: 50%; */
+}
+
+.progress p{
+    font-weight: bold;
+}
+main .card-header .progress .number{
+position: absolute;
+top: 0;
+left: 0;
+height: 100%;
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+main  .card-header {
+   margin-top: 15px;
+   margin-left: 30px;
+}
+
+.cont-c{
+  /* background-color: #ffffff; */
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  /* box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); */
+  padding-bottom: 10px;
+}
+
+.task-details .task-name{
+  text-align: center;
+}
+
+/* =====================end card 1 ========================= */
+/* ====================card 2============================ */
+.card:nth-child(2){
+    grid-area: c2;
+}
+.card:nth-child(3){
+    grid-area: c3;
+}
+/* ===================== card 4======================== */
+.card:nth-child(4){
+    grid-area: c4;
+}
+main .task-done {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /* padding: 15px 0 10px 0; */
+}
+main .day-wek-mon {
+display: flex;
+list-style: none;
+align-items: center;
+}
+.day-wek-mon li{
+    margin-left: 40px;
+    transition: var(--tran-02);
+}
+.day-wek-mon li:hover{
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+} 
+/* ====================== end card 4================================= */
+.card:nth-child(5){
+grid-area: c5;
+
+}
+.card:nth-child(6){
+grid-area: c6;
+}
+
+    </style>
+</head>
+<body>
+
+<!-- Main -->
+<main class="main">
+  <div class="card">
+      <div class="card-header">
+          <i class='bx bx-star bx-sm'></i>
+          <div class="middle">
+              <div class="left">
+                  <h3>Task Completed</h3>
+              </div>
+              <div class="progress">
+                <div id="progress-chart1"></div>
+                  <div class="number">
+                      <p>{{ completed_percentage }} %</p>
+                  </div>
+              </div>
+          </div>
+            <p class="text-card">{{new_added_task_count }}+ more from this week</p>
+      </div>
+  </div>
+  <div class="card">
+      <div class="card-header">
+          <i class='bx bx-notepad bx-sm'></i>
+          <div class="middle">
+              <div class="left">
+                  <h3>New Task</h3>
+              </div>
+              <div class="progress">
+                <div id="progress-chart3"></div>
+                <div class="number">
+                    <p>{{ new_percentage }} %</p>
+                </div>
+            </div>
+          </div>
+          <p class="text-card">{{ task_count }}+ more from this week</p>
+      </div>
+  </div>
+  <div class="card">
+      <div class="card-header">
+          <i class='bx bx-task bx-sm'></i>
+          <div class="middle">
+              <div class="left">
+                  <h3>Project Done
+                  </h3>
+              </div>
+              <div class="progress">
+                <div id="progress-chart2"></div>
+                  <div class="number">
+                      <p>{{ completed_percentage }} %</p>
+                  </div>
+              </div>
+          </div>
+          <p class="text-card">{{ finished_task_count }}+ more from this week</p>
+      </div>
+  </div>
+  <div class="card">
+      <div class="task-done">
+        <div id="chart-timeline"></div>
+      </div>
+  </div>
+  <div class="card">
+    <div class="containerr">
+      <div class="icon-cont">
+        <i class='bx bx-calendar-star'></i>
+      </div>
+      <h3>New Task :</h3>
+    </div>
+    <div class="cont-c">
+      <div class="task-details">
+        {% if next_task %}
+        <div class="task-name">{{ next_task.task }}</div>
+        <br>
+        <div class="task-dates">
+          <span>Start Date: </span>{{ next_task.start_date }}
+          <br><br>
+          <span>End Date: </span>{{ next_task.end_date }}
+        </div>
+        {% else %}
+        <div class="no-task">No upcoming tasks</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="containerr">
+      <div class="icon-cont">
+        <i class='bx bx-calendar-edit'></i>
+      </div>
+      <h3>Previous Task :</h3>
+    </div>
+    <div class="cont-c">
+      <div class="task-details">
+        {% if previous_task %}
+        <div class="task-name">{{ previous_task.task }}</div>
+        <br>
+        <div class="task-dates">
+          <span>Start Date: </span>{{ previous_task.start_date }}
+          <br><br>
+          <span>End Date: </span>{{ previous_task.end_date }}
+        </div>
+        {% else %}
+        <div class="no-task">No previous tasks</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</main>
+<!-- End Main -->
+
+
+
+
+
+
+<script>
+    // Function to create and render the progress chart
+    function renderChart(elementId, completedPercentage) {
+      // Calculate the remaining percentage for the empty center
+      let remainingPercentage = 100 - completedPercentage;
+  
+      // Create the options for the progress chart
+      let options = {
+        series: [completedPercentage],
+        chart: {
+          height: 140,
+          width: 100,
+          type: 'radialBar',
+          offsetY: -10 // Adjust the vertical position of the chart
+        },
+        plotOptions: {
+          radialBar: {
+            startAngle: -90,
+            endAngle: 90,
+            hollow: {
+              margin: 0,
+              size: '50%' // Adjust the size of the hollow center
+            },
+            track: {
+              background: '#f6f7f9',
+              strokeWidth: '97%',
+              margin: 5, // margin is in pixels
+            },
+            dataLabels: {
+              show: false
+            }
+          }
+        },
+        fill: {
+          colors: ['#8e44ad']
+        },
+        stroke: {
+          lineCap: 'round'
+        },
+        labels: ['']
+      };
+  
+      // Create and render the progress chart
+      let chart = new ApexCharts(document.querySelector("#" + elementId), options);
+      chart.render();
+    }
+  
+    // Call the renderChart function with different element IDs and completed percentages
+    renderChart("progress-chart1", {{ completed_percentage }});
+    renderChart("progress-chart2", {{ completed_percentage }});
+    renderChart("progress-chart3", {{ new_percentage }});
+
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+  // Get the timeline data from Flask and parse it as JSON
+  const timelineData = JSON.parse('{{ timeline_data | tojson | safe }}');
+
+  // Convert the timeline data to the required format for ApexCharts
+  const chartData = timelineData.map(({ task, start_date, end_date }) => ({
+    x: task,
+    y: [new Date(start_date).getTime(), new Date(end_date).getTime()]
+  }));
+
+  // Set up the ApexCharts options
+  const options = {
+    series: [
+      {
+        data: chartData
+      }
+    ],
+    chart: {
+      height: 390,
+      width: 650,
+      type: 'rangeBar',
+      toolbar: {
+        show: false
+      }
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true
+      }
+    },
+    xaxis: {
+      type: 'datetime',
+      title: {
+        text: 'Dates',
+        style: {
+          fontSize: '14px',
+          fontWeight: 'bold',
+          fontFamily: 'Montserrat, sans-serif',
+          color: '#333333'
+        }
+      }
+    },
+    yaxis: {
+      title: {
+        text: 'Tasks',
+        style: {
+          fontSize: '14px',
+          fontWeight: 'bold',
+          fontFamily: 'Arial, sans-serif',
+          color: '#333333'
+        }
+      }
+    },
+    colors: ['#8a2be2'], // Violet color
+    title: {
+      text: 'Important Tasks and Projects',
+      align: 'center',
+      margin: 10,
+      offsetX: 0,
+      offsetY: 0,
+      floating: false,
+      style: {
+        fontSize: '18px',
+        fontWeight: 'bold',
+        fontFamily: 'Arial, sans-serif',
+        color: '#333333'
+      }
+    },
+    responsive: [
+      {
+        breakpoint: 768,
+        options: {
+          chart: {
+            width: '100%'
+          }
+        }
+      }
+    ]
+  };
+
+  // Create the ApexCharts instance and render the chart
+  const chart = new ApexCharts(document.getElementById('chart-timeline'), options);
+
+  // Render the chart
+  chart.render();
+});
+    
+      
+      
+
+      
+      
+    
+  </script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>
+
+
+
+    

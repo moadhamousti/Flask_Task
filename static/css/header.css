@@ -1,0 +1,75 @@
+header{
+    width: 70%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+header .column{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+header .column .desktop{
+    width: 100%;
+    display: inherit;
+    align-items: center;
+    justify-content: space-between;
+}
+header .column img{
+    margin-top: 8px;
+}
+header .mobile{
+    display: none;
+}
+header .mobile .menu{
+    display: none;
+}
+.dropIn{
+    display: flex;
+    animation: dropIn .3s;
+}
+.dropOut{
+    display: none;
+    animation: dropOut .3s;
+}
+header .column .desktop nav{
+    display: flex;
+}
+header .column nav a{
+    text-decoration: none;
+    color: var(--dark-blue); 
+    margin: 0 15px;
+    font-size: .8rem;
+}
+header .column nav a h3{
+    transition: .3s;
+}
+header .column nav a:hover h3{
+    color:  #5a5a5a;
+}
+header .column .btn a{
+    text-decoration: none;
+}
+
+@keyframes dropIn{
+    from{
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes dropOut{
+    from{
+        transform: translateY(0);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(-100);
+        opacity: 1;
+    }
+}
+

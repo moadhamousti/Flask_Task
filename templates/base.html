@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- ===== BOX ICONS ===== -->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+        <!-- ===== CSS ===== -->
+        <link rel="stylesheet" href="/static/css/styles.css">
+
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+        <title>{{ current_user.fullname }} Dashboard</title>
+    </head>
+    <style>
+      #moon-icon{
+        width: 18px;
+        cursor: pointer;
+        margin-left: 23px;
+        margin-top: 90px;
+        
+      }
+
+      /*===== GOOGLE FONTS =====*/
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+
+/*===== VARIABLES CSS =====*/
+/*===== VARIABLES CSS =====*/
+:root{
+  --header-height: 3rem;
+  --nav-width: 68px;
+
+  /*===== Colors =====*/
+  --first-color: #4723D9;
+  --first-color-light: #AFA5D9;
+  --first-toggle-color:#4723D9;
+  --first-lighter-color:#8264fc;
+  --white-color: #F7F6FB;
+  --light-grey: #b5b5b5;
+  --darker-gray:#525252;
+  --link-color:#5F6389;
+  --black:#0000;
+  --light-blue:rgb(23, 175, 195);
+  --white2-color:#ffffff;
+  --menu-white-color:#ffffff;
+  --navbar-white-color:#ffffff;
+  --primary-color:#695CFE;
+  --link-bar-color:#5F6389;
+
+
+  
+  
+  /*===== Font and typography =====*/
+  --body-font: 'Nunito', sans-serif;
+  --normal-font-size: 1rem;
+  
+  /*===== z index =====*/
+  --z-fixed: 100;
+}
+
+/*===== BASE =====*/
+*,::before,::after{
+  box-sizing: border-box;
+}
+
+.my-name{
+  color: #666666;
+}
+
+
+.my-menu-header h3{
+  color: gray;
+}
+
+.menu-items h3{
+  color: gray;
+}
+
+
+.dark-theme{
+  --first-color: #4723D9;
+  --first-lighter-color:#4723D9;
+  --first-color-light: #413c57;
+  --white-color: #000000;
+  --light-grey: #303030;
+  --darker-gray:#525252;
+  --link-color:#5F6389;
+  --black:#ffffff;
+  --light-blue:rgb(23, 175, 195);
+  --white2-color:#000000;
+  --menu-white-color:#000000;
+  --navbar-white-color:#000000;
+  --first-toggle-color:#ffffff;
+  --link-bar-color:#ffffff;
+}
+
+.my-icons-container a i{
+  color: rgb(255, 255, 255);
+}
+
+.user-info img{
+  width: 45px;
+  height: 45px;
+}
+
+.user-info h5{
+  color: var(--darker-gray);
+}
+.notifications h3{
+  color: var(--darker-gray);
+}
+
+#email-menu{
+  color: var(--darker-gray);
+}
+
+.user-info h2{
+  color: var(--darker-gray);
+}
+
+.search-box .search-bar {
+    border: none;
+    outline: 0;
+    color: var(--darker-gray);
+    border-left: 5px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 10px 50px ;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
+    background: url(/static/images/8.svg) no-repeat 15px 5px/20px 30px, #fff;
+  }
+
+    </style>
+
+
+    <body id="body-pd">
+        <header class="header" id="header">
+            <div class="header__toggle">
+                <i class='bx bx-menu' id="header-toggle"></i>
+            </div>
+            <div class="search-box">
+              <input class="search-bar" id="search-input" placeholder="Search...">
+            </div>
+
+            <div class="dropdown">
+              <button class="dropdown-toggle" onclick="toggleDropdown()">
+                <i class="ri-notification-line"></i>
+              </button>
+              <div class="dropdown-menu" id="dropdownMenu">
+                <div class="notifications">
+                  <h3>Notifications</h3>
+                  <hr>
+                  <a href="#" class="sub-menu-link" id="messages">
+                      <img src="/static/images/profile.png" alt="">
+                      <p>New Message</p>
+                  </a>
+                  <a href="#" class="sub-menu-link">
+                      <img src="/static/images/profile.png" id="messages">
+                      <p>New Message</p>
+                  </a>
+                  <a href="#" class="sub-menu-link">
+                      <img src="/static/images/profile.png" id="messages">
+                      <p>New Message</p>
+                  </a>
+                  <a href="#" class="sub-menu-link">
+                      <img src="/static/images/profile.png" id="messages">
+                      <p>New Message</p>
+                  </a>
+                </div>
+                <a href="#" class="see-more">See More Notifications</a>
+              </div>
+            </div>
+            
+            
+            <img src="{{ url_for('static', filename='images/{}'.format(user.profile_picture)) }}" alt="" onclick="toggleMenu()" class="user-pic" alt="">
+
+            <div class="sub-menu-wrap" id="subMenu">
+              <div class="sub-menu">
+                  <div class="user-info" id="user-info">
+                    <img src="{{ url_for('static', filename='images/{}'.format(user.profile_picture)) }}">
+                      <h2 id="fullname-menu">{{ current_user.fullname }}</h2>
+                  </div>
+                <div class="user-email">
+                  <h5 id="email-menu">{{ current_user.email }}</h5>
+                </div>
+                <hr>
+
+                <a href="{{ url_for('profil') }}" class="sub-menu-link">
+                <img src="/static/images/profile.png" alt="">
+                <p>Edit Profile</p>
+                <span>></span>
+                </a>
+                <a href="{{ url_for('profil') }}" class="sub-menu-link">
+                <img src="/static/images/setting.png" alt="">
+                <p>Settings & Privacy</p>
+                <span>></span>
+                </a>
+                <a href="" class="sub-menu-link">
+                <img src="/static/images/help.png" alt="">
+                <p>Help & Support</p>
+                <span>></span>
+                </a>
+                <a href="{{ url_for('logout') }}" class="sub-menu-link">
+                <img src="/static/images/logout.png" alt="">
+                <p>Log Out</p>
+                <span>></span>
+                </a>
+            </div>
+            </div>
+            
+            <!-- <div class="my-dropdown">
+                <button class="my-dropdown-toggle" onclick="toggleMenuDropdown()">
+                  <i class="ri-arrow-drop-down-line" id="my-dropdown-icon"></i> -->
+                <!-- </button> -->
+                <!-- <div class="my-dropdown-menu" id="my-dropdown-menu">
+                  <div class="my-menu-header">
+                    <h3>Today's Schedule</h3>
+                    <div class="my-icons-container">
+                      <a href=""><i class="ri-archive-drawer-line"></i></a>
+                      <a href=""><i class="ri-calendar-2-line"></i></a>
+                    </div>
+                  </div>
+                  <div class="my-messages">
+                    <div class="menu-items">
+                      <h3>Messages</h3>
+                      <p class="my-more">+ More</p>
+                    </div>
+                    <div class="my-message-container">
+                      <div class="my-message">
+                        <div class="my-photo"><img src="/static/images/perfil.jpg" alt=""></div>
+                        <div class="my-info">
+                          <p class="my-name"></p>
+                          <p class="my-message-text">Hi! How are You?</p>
+                        </div>
+                      </div>
+                      <div class="my-message">
+                        <div class="my-photo"><img src="/static/images/perfil2.jpg" alt=""></div>
+                        <div class="my-info">
+                          <p class="my-name">Morad Nasir</p>
+                          <p class="my-message-text">Do you need that design?</p>
+                        </div>
+                      </div>
+                      <div class="my-message">
+                        <div class="my-photo"><img src="/static/images/perfil4.jpg" alt=""></div>
+                        <div class="my-info">
+                          <p class="my-name">Yassir Saadaoui</p>
+                          <p class="my-message-text">What kind of designs do you...</p>
+                        </div>
+                      </div>
+                      <div class="my-message">
+                        <div class="my-photo"><img src="/static/images/perfil3.jpg" alt=""></div>
+                        <div class="my-info">
+                          <p class="my-name">Ahmed Yazidi</p>
+                          <p class="my-message-text">Awesome design!!</p>
+                        </div>
+                      </div>
+                    </div> -->
+
+                    <!-- <div class="menu-items">
+                      <h3>New Task</h3>
+                      <div class="dropdown-small">
+                        <a href="#" id="dropdown-linker"><i class="ri-more-fill"></i></a>
+                        <div class="dropdown-contents">
+                          <a href="#">My Schedule</a>
+                          <a href="#">Your Tasks</a>
+                          <a href="#">More...</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+            
+
+
+        </header>
+
+        <div class="l-navbar" id="nav-bar">
+            <nav class="nav">
+                <div>
+                    <a href="#" class="nav__logo">
+                        
+                        <img src="/static/images/logoo.svg" alt="" id="nav-logo">
+                    </a>
+
+                    <div class="nav__list">
+                        <a href="{{ url_for('dashboard') }}" class="nav__link active">
+                        <!-- <i class='bx bx-grid-alt nav__icon' ></i> -->
+                            <img src="/static/images/1.svg" class="nav__icon" alt="">
+                            <span class="nav__name">Dashboard</span>
+                        </a>
+
+                        <a href="{{ url_for('stats') }}" class="nav__link">
+                            <!-- <i class='bx bx-user nav__icon' ></i> -->
+                            <img src="/static/images/2.svg" class="nav__icon" alt="">
+                            <span class="nav__name">Statistics</span>
+                        </a>
+                        
+                        <a href="{{ url_for('calendar') }}" class="nav__link">
+                            <!-- <i class='bx bx-message-square-detail nav__icon' ></i> -->
+                            <img src="/static/images/3.svg" class="nav__icon" alt="">
+                            <span class="nav__name">Calendar</span>
+                        </a>
+
+                        <!-- <a href="{{ url_for('settings') }}" class="nav__link"> -->
+                            <!-- <i class='bx bx-bookmark nav__icon' ></i> -->
+                            <!-- <img src="/static/images/4.svg" class="nav__icon" alt=""> -->
+                            <!-- <span class="nav__name">Settings</span> -->
+                        <!-- </a> -->
+
+                        <a href="{{ url_for('add_user') }}" class="nav__link">
+                            <!-- <i class='bx bx-folder nav__icon' ></i> -->
+                            <img src="/static/images/5.svg" class="nav__icon" alt="">
+                            <span class="nav__name">Messages</span>
+                        </a>
+
+                        <a href="{{ url_for('profil') }}" class="nav__link">
+                            <!-- <i class='bx bx-bar-chart-alt-2 nav__icon' ></i> -->
+                            <img src="/static/images/6.svg" class="nav__icon" alt="">
+                            <span class="nav__name">Profil</span>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                <img src="/static/images/moon.png" id="moon-icon">
+
+                <a href="{{ url_for('logout') }}" class="nav__link">
+                    <i class='bx bx-log-out nav__icon' ></i>
+                    <span class="nav__name">Log Out</span>
+                </a>
+            </nav>
+        </div>
+
+        
+        <!--===== MAIN JS =====-->
+        <script src="/static/js/scripts/main.js"></script>
+        <script src="/static/js/scripts/drop-menu.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+
+
+
+        <script>
+          var icon = document.getElementById("moon-icon");
+          var logo = document.getElementById("nav-logo");
+
+          function toggleDarkTheme() {
+              var isDarkTheme = document.body.classList.toggle("dark-theme");
+              if (isDarkTheme) {
+                  icon.src = "/static/images/sun.png";
+                  logo.src = "/static/images/logowhite.svg";
+              } else {
+                  icon.src = "/static/images/moon.png";
+                  logo.src = "/static/images/logoo.svg";
+              }
+          }
+
+          icon.onclick = toggleDarkTheme;
+
+
+
+          // Connect to the Socket.IO server
+          const socket = io();
+
+          // Listen for the 'friend_request' event
+          socket.on('friend_request', (data) => {
+            const { friend } = data;
+            displayFriendRequestNotification(friend);
+          });
+
+          // Function to display friend request notification in the dropdown
+          function displayFriendRequestNotification(friend) {
+            const notificationDiv = document.createElement('div');
+            notificationDiv.className = 'sub-menu-link';
+            notificationDiv.innerHTML = `
+              <img src="/static/images/profile.png" alt="">
+              <p>New friend request from ${friend}</p>
+            `;
+
+            // Add the notification to the dropdown
+            const notificationsContainer = document.querySelector('.notifications');
+            notificationsContainer.appendChild(notificationDiv);
+        }
+
+
+        document.getElementById('search-input').addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+          var query = this.value.trim().toLowerCase();
+
+          if (query === 'profile') {
+            window.location.href = '/dashboard/profil';
+          } else if (query === 'calendar') {
+            window.location.href = '/dashboard/calendar';
+          } else if (query === 'friends' || query === 'message') {
+            window.location.href = '/dashboard/add_user';
+          } else if (query === 'settings') {
+            window.location.href = '/dashboard/settings';
+          } else if (query === 'dashboard') {
+            window.location.href = '/dashboard';
+          } else {
+            // Handle the case when no specific query matches
+            alert('No results found');
+          }
+
+          // Clear the search input field
+          this.value = '';
+          event.preventDefault();
+        }
+      });
+
+          
+                    
+      </script>
+    </body>
+</html>
