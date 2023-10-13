@@ -3,12 +3,12 @@
 
 ### Task Manager dashboard Using Flask Contains :
 
-- Landing Page to present the service and features of the dashboard .
-- Sign up & Log in Pages.
-- After Signing up you will get to the dashboard with the informations Provided.
-- You can add tasks and edit your profil.
-- Contains Charts to make your data organized.
-- Starting date and End date For tasks.
+☑️ - Landing Page to present the service and features of the dashboard .
+☑️ - Sign up & Log in Pages.
+☑️ - After Signing up you will get to the dashboard with the informations Provided.
+☑️ - You can add tasks and edit your profil.
+☑️ - Contains Charts to make your data organized.
+☑️ - Starting date and End date For tasks.
 
 ### Screen Shoots 📷 :
 
