@@ -1,6 +1,5 @@
 # Task manager Using Flask 🕡 📅 :
 
-
 ### Task Manager dashboard Using Flask Contains :
 
 
