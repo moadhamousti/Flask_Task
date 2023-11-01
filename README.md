@@ -17,7 +17,6 @@
 
 ### Screen Shoots 📷 :
 
-
 <p align="center">
   <img width="960" alt="Dashboard" src="https://github.com/moadhamousti/Flask_Task/assets/118165767/58f93283-8912-4369-ae88-e4158813246b">
 </p>
