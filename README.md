@@ -1,7 +1,6 @@
 # Task manager Using Flask 🕡 📅 :
 
-### Task Manager dashboard Using Flask Contains :
-
+### Task Manager dashboard Using Flask Contains 
 
 ☑️ - Landing Page to present the service and features of the dashboard .
 
